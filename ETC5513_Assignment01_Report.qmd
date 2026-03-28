@@ -2,7 +2,8 @@
 title: "ETC5513 Assignment 01"
 author: "Chenuli Duasha Dias Muthukuda Arachchige"
 format:
-  html: default
+  html:
+    theme: cerulean
   pdf: default
 execute:
   echo: false

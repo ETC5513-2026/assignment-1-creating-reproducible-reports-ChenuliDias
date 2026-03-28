@@ -11,10 +11,18 @@ execute:
   message: false
 ---
 
-
 ```{r}
-#Loading required libraries
+# Loading required libraries
 
 library(tidyverse)
 library(ggplot2)
 library(knitr)
+```
+
+```{r}
+# Load the assigned dataset
+
+# load your dataset
+data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
+```
+

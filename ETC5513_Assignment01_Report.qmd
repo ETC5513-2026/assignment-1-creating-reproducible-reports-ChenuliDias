@@ -26,3 +26,6 @@ library(knitr)
 data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
 ```
 
+## Introduction 
+This report will examine the relationship between marketing spend per customer and their corresponding purchase amounts in a retail context.Understanding whether higher marketing investment leads to increased purchases is important for improving budget efficiency and return on investment. By analysing customer-level campaign data, this study aims to determine whether increased marketing expenditure leads to higher purchasing behaviour and therefore improved sales outcomes. The findings will support better marketing decisions by providing insights for more efficient and data-driven strategies.
+

@@ -17,13 +17,13 @@ execute:
 library(tidyverse)
 library(ggplot2)
 library(knitr)
+
 ```
 
 ```{r}
 # Load the assigned dataset
 
-# load your dataset
-data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
+raw_campaign_data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
 ```
 
 ## Introduction 
@@ -31,5 +31,38 @@ This report examines the relationship between marketing expenditure per customer
 
 
 ## Research Question
-This report investigates the research question: "To what extent does marketing expenditure per customer influence purchase amounts?" 
+This report investigates the research question: "To what extent does marketing expenditure per customer influence purchase amounts?". 
+
 The study analyses customer-level campaign data to evaluate the direction and strength of this relationship. The aim is to determine whether increased marketing investment leads to meaningful changes in customer purchasing behaviour.
+
+
+## Dataset Introduction
+
+This dataset contains customer-level campaign data, including key variables such as marketing_spend and purchase_amount, which are used to analyse the relationship between marketing investment and customer spending behaviour. Each observation represents an individual customer and captures their response to marketing efforts in terms of purchasing activity. 
+
+Additional variables, such as visits and segment, were retained as they provide valuable context on customer engagement and enable comparisons across different customer groups to support more data-driven strategies. 
+
+During the data cleaning process, variables such as notes and signup_date were removed as they were not directly relevant to the research question and provided limited additional insight into the relationship being analysed. Records with missing values in purchase_amount were excluded to ensure accurate analysis, as missing outcome values would reduce reliability, and any duplicate entries were removed so that each customer was represented only once in the dataset.
+
+```{r}
+# Cleaning the dataset 
+
+# Check structure of the data
+str(raw_campaign_data)
+
+# Select only releavent variables 
+processed_campaign_data <- raw_campaign_data |>
+  select(customer_id,marketing_spend, purchase_amount, visits, segment)
+
+# Remove NA values from purchases amount
+processed_campaign_data <- processed_campaign_data |>
+  filter(!is.na(purchase_amount))
+
+# Remove any duplicates 
+processed_campaign_data <- processed_campaign_data |>
+distinct()
+
+```
+
+
+

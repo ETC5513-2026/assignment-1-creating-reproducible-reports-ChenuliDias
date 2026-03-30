@@ -9,6 +9,7 @@ execute:
   echo: false
   warning: false
   message: false
+  output: false
 ---
 
 ```{r}
@@ -17,7 +18,7 @@ execute:
 library(tidyverse)
 library(ggplot2)
 library(knitr)
-
+library(tinytex)
 ```
 
 ```{r}

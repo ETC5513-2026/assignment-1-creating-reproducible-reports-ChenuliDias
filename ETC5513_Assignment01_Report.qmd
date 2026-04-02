@@ -18,12 +18,14 @@ library(tidyverse)
 library(ggplot2)
 library(knitr)
 library(tinytex)
+
 ```
 
 ```{r}
 # Load the assigned dataset
 
 raw_campaign_data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
+
 ```
 
 ## Introduction 
@@ -60,6 +62,7 @@ The raw dataset was cleaned to ensure accuracy and relevance. Variables not dire
 
 ## Dataset Description subsection
 ```{r}
+#| output: false
 
 #Check the rows 
 nrow(processed_campaign_data)
@@ -84,22 +87,23 @@ The dataset contains a mix of numeric variables, including marketing_spend, purc
 
 
 ```{r}
+#| label: tbl-summary
+#| tbl-cap: "Summary of Marketing Spend, Purchase Amount and Visits by Customer Segment"
 
-# Table 01 : Finding the averages of the variables by segement 
 
 processed_campaign_data |>
   group_by(segment) |>
   summarise(
     avg_marketing_spend = round(mean(marketing_spend), 2),
     avg_purchase_amount = round(mean(purchase_amount), 2),
-    avg_visits_amount = round(mean(visits), 2),
+    avg_visits = round(mean(visits), 2),
     customers = n()
   ) |>
-  knitr::kable(caption = "Table 1: Summary of Marketing Spend, Purchase Amount and Visits by Customer Segment")
+  knitr::kable()
 
 ```
 
-Table 1 summarises the average marketing spend, purchase amount, number of visits, and total customers across each segment, providing a broader view of differences in customer behaviour and engagement beyond marketing investment and purchasing outcomes.
+@tbl-summary summarises the average marketing spend, purchase amount, number of visits, and total customers across each segment, providing a broader view of differences in customer behaviour and engagement beyond marketing investment and purchasing outcomes.
 
 The Consumer segment records the highest average marketing spend (175.14) and visits (6.15), but not the highest purchase amount (125.43), suggesting that greater marketing exposure and engagement do not necessarily lead to higher spending. In contrast, the Enterprise segment, despite lower marketing spend (140.01) and the fewest visits (4.6), achieves the highest average purchase amount (131.39), indicating more efficient conversion of marketing efforts into sales.
 
@@ -107,27 +111,79 @@ The SMB segment shows lower marketing spend (125.77), visits (5), and the lowest
 
 
 ```{r}
-
-# Figure 01 : Distribution of Purchase amount across customers 
-
-library(ggplot2)
+#| label: fig-purchase-distribution
+#| fig-cap: "Distribution of Purchase amounts across Customer Segments"
 
 ggplot(data = processed_campaign_data,
        aes(x = segment,
            y = purchase_amount,
            fill = segment)
        ) +
-  geom_boxplot(alpha = 0.8,
-               colour = "black") +
+  geom_boxplot(colour = "black",
+               alpha = 0.8) +
   ggtitle("Distribution of Purchase Amount by Customer Segment") +
   labs(x = "Customer Segment",
-       y = "Purchase Amount",
-       caption = "Figure 1: Distribution of purchase amounts across customer segments"
-       ) +
+       y = "Purchase Amount") +
   theme_minimal()
 
 ```
 
-Figure 1 illustrates the distribution of purchase amounts across different customer segments. Compared to the summary statistics in Table 1, this figure provides a clearer view of the spread and variability within each segment. The Consumer segment shows the widest distribution, indicating substantial variability, with both low and high purchase amounts present. In contrast, the Enterprise segment has a more concentrated distribution around a higher median, suggesting more consistent and generally higher purchase amounts. The SMB segment displays a moderate spread with a lower median, indicating generally lower and moderately varied purchasing behaviour
+@fig-purchase-distribution illustrates the distribution of purchase amounts across different customer segments. Compared to the summary statistics in @tbl-summary, this figure provides a clearer view of the spread and variability within each segment. The Consumer segment shows the widest distribution, indicating substantial variability, with both low and high purchase amounts present. In contrast, the Enterprise segment has a more concentrated distribution around a higher median, suggesting more consistent and generally higher purchase amounts. The SMB segment displays a moderate spread with a lower median, indicating generally lower and moderately varied purchasing behaviour
 
 Overall, the boxplot reveals that purchase amounts are uneven and vary considerably across the dataset. Although the median values fall within a moderate range, the wide spread of data suggests that some customers make significantly larger purchases than others. This indicates that customer spending is not consistent and provides deeper insight into purchasing patterns. These observations establish a foundation for further analysis of the relationship between marketing expenditure and purchase amount.
+
+
+## Results 
+
+```{r}
+#| label: fig-marketing-purchase-relationship
+#| fig-cap: “Relationship between Marketing spend and Purchase amount"
+
+ggplot(data = processed_campaign_data,
+       aes(x = marketing_spend,
+           y = purchase_amount)
+       ) +
+  geom_point(colour = "blue",
+             alpha = 0.6) +
+  geom_smooth(method = "lm",
+              colour = "red",
+              se = FALSE) +
+  ggtitle("Relationship Between Marketing Spend and Purchase Amount") +
+  labs(x = "Marketing Spend",
+       y = "Purchase Amount") +
+  theme_minimal()
+
+
+```
+
+
+
+
+```{r}
+#| label: fig-marketing-purchase-by-segment-relationship
+#| fig-cap: "Purchase amount vs Marketing spend by Customer Segment"
+
+ggplot(data = processed_campaign_data,
+       aes(x = marketing_spend,
+           y = purchase_amount)
+       ) +
+  geom_point(colour = "purple",
+             alpha = 0.6) +
+  geom_smooth(method = "lm",
+              colour = "black",
+              se = FALSE) +
+  facet_wrap(~ segment) +
+  ggtitle("Purchase Amount vs Marketing Spend by Customer Segment") +
+  labs(x = "Marketing Spend",
+       y = "Purchase Amount") +
+  theme_minimal()
+
+```
+
+
+
+@fig-marketing-purchase-relationship shows a positive relationship between marketing expenditure per customer and purchase amount, indicated by the upward-sloping regression line. As marketing spend increases, purchase amounts generally rise, suggesting that higher investment is associated with higher purchase amount. However, the data points are widely dispersed around the line, indicating considerable variability. At lower levels of marketing spend, purchase amounts are more clustered, whereas at higher spending levels, the spread widens, with both moderate and high values observed. This suggests that while increased marketing spend can lead to higher purchases, the outcomes become less predictable, indicating a moderate rather than strong relationship. This therefore aligns with @fig-purchase-distribution, where we saw purchase amounts were unevenly distributed across the datset.
+
+@fig-marketing-purchase-by-segment-relationship examines this relationship across different customer segments. The overall positive trend remains, but its strength varies slightly. The Enterprise segment shows a more consistent pattern, with points closer to the regression line, suggesting more reliable outcomes from increased marketing spend. In contrast, the Consumer segment displays greater variability, particularly at higher spending levels, indicating less predictable results. The SMB segment also shows a positive trend, though with some dispersion, suggesting that marketing spend influences purchases but not consistently. These findings are consistent with @tbl-summary, where higher average marketing spend did not always correspond to higher average purchases across segments.
+
+Overall, to a moderate extent, higher marketing expenditure per customer influences purchase amount. The visual evidence confirms a positive relationship, but the spread of data points and slight variation across segments indicate that this effect is not strong or fully consistent. This suggests that while increasing marketing spend can lead to higher purchases, its impact is not uniform and depends on how each customers respond to marketing efforts which may vary depending on segment characteristics, visits, and other factors.

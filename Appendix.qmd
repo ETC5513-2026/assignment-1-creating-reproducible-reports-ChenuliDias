@@ -15,11 +15,11 @@ I used AI as a supplementary support tool while completing this assignment, prim
 
 Specifically, I used AI to:
 
-1- Review, condense, and rephrase written sections of my report while preserving my original explanations, to improve readability, flow, and academic tone.
+1 - Review, condense, and rephrase written sections of my report while preserving my original explanations, to improve readability, flow, and academic tone.
 
-2- Provide general guidance and explanations on R functions for summarising data, checking data structures, and performing data cleaning tasks.
+2 - Provide general guidance and explanations on R functions for summarising data, checking data structures, and performing data cleaning tasks.
 
-3- Offer advice on best practices for presenting tables and plots, including enhancing clarity, readability, and the use of colour choices and themes in ggplot2.
+3 - Offer advice on best practices for presenting tables and plots, including enhancing clarity, readability, and the use of colour choices and themes in ggplot2.
 
 All data cleaning, coding, table and plot creation, analysis, and interpretation were completed independently by me. All outputs and conclusions reflect my own work.
 

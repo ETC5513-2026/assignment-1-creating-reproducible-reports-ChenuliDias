@@ -90,7 +90,7 @@ The dataset contains a mix of numeric variables, including marketing_spend, purc
 
 ```{r}
 #| label: tbl-summary
-#| tbl-cap: "Summary of Marketing Spend, Purchase Amount and Visits by Customer Segment"
+#| tbl-cap: "Summary of the Average Marketing Spend, Purchase Amount and Visits by Customer Segment"
 
 
 processed_campaign_data |>
@@ -105,11 +105,12 @@ processed_campaign_data |>
 
 ```
 
-@tbl-summary summarises the average marketing spend, purchase amount, number of visits, and total customers across each segment, providing a broader view of differences in customer behaviour and engagement beyond marketing investment and purchasing outcomes.
+@tbl-summary summarises the average marketing spend, purchase amount, number of visits, and total customers across each segment, providing a broader view of differences in customer behaviour and engagement beyond marketing investment and purchasing amount.
 
-The consumer segment records the highest average marketing spend (175.14) and visits (6.15), but not the highest purchase amount (125.43), suggesting that greater marketing exposure and engagement do not necessarily lead to higher spending. In contrast, the Enterprise segment, despite lower marketing spend (140.01) and the fewest visits (4.6), achieves the highest average purchase amount (131.39), indicating more efficient conversion of marketing efforts into sales.
+The Consumer segment records the highest average marketing spend (175.14) and average visits (6.15), but not the highest average purchase amount (125.43), suggesting that greater marketing exposure and engagement do not necessarily translate into higher spending. In contrast, the Enterprise segment, despite lower average marketing spend (140.01) and the fewest average visits (4.6), achieves the highest average purchase amount (131.39), indicating a more efficient conversion of marketing efforts into sales.
+The SMB segment shows lower average marketing spend (125.77), visits (5), and the lowest average purchase amount (100.09), reflecting comparatively lower engagement and spending levels. 
 
-The SMB segment shows lower marketing spend (125.77), visits (5), and the lowest purchase amount (100.09), reflecting comparatively weaker engagement and purchasing behaviour. Overall, these patterns suggest that customer responses to marketing efforts vary across segments, highlighting the influence of engagement and segment characteristics on marketing effectiveness. This provides important context for analysing the relationship between marketing expenditure and purchase amounts in the following section. 
+Overall, these patterns suggest that customer responses to marketing efforts vary across segments, highlighting the influence of engagement and segment characteristics on marketing effectiveness. This provides important context for analysing the relationship between marketing expenditure and purchase amounts in the following section. 
 
 
 ```{r}
@@ -130,9 +131,9 @@ ggplot(data = processed_campaign_data,
 
 ```
 
-@fig-purchase-distribution illustrates the distribution of purchase amounts across different customer segments. Compared to the summary statistics in @tbl-summary, this figure provides a clearer view of the spread and variability within each segment. The Consumer segment shows the widest distribution, indicating substantial variability, with both low and high purchase amounts present. In contrast, the Enterprise segment has a more concentrated distribution around a higher median, suggesting more consistent and generally higher purchase amounts. The SMB segment displays a moderate spread with a lower median, indicating generally lower and moderately varied purchasing behaviour
+@fig-purchase-distribution illustrates the distribution of purchase amounts across different customer segments. Compared to the summary statistics in @tbl-summary, this figure provides a clearer view of the spread and variability within each segment. The Consumer segment shows the widest distribution, indicating substantial variability, with both low and high purchase amounts present. In contrast, the Enterprise segment has a more concentrated distribution around a higher median, suggesting more consistent and generally higher purchase amounts. The SMB segment has a lower median, indicating lower typical purchasing amounts, while the moderate spread reflects a reasonable degree of variation within the segment.
 
-Overall, the boxplot reveals that purchase amounts are uneven and vary considerably across the dataset. Although the median values fall within a moderate range, the wide spread of data suggests that some customers make significantly larger purchases than others. This indicates that customer spending is not consistent and provides deeper insight into purchasing patterns. These observations establish a foundation for further analysis of the relationship between marketing expenditure and purchase amount.
+Overall, the boxplot reveals that purchase amounts are uneven and vary considerably across the dataset. Although the median values fall within a moderate range, the wide spread of data suggests that some customers make significantly larger or smaller purchases than others. This indicates that customer spending is not consistent and provides deeper insight into purchasing patterns. These observations establish a foundation for further analysis of the relationship between marketing expenditure and purchase amount.
 
 
 ## Results

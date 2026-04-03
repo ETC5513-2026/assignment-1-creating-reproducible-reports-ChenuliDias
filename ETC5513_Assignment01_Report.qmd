@@ -12,12 +12,16 @@ execute:
 ---
 
 ```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| output: false
+
 # Loading required libraries
 
 library(tidyverse)
 library(ggplot2)
 library(knitr)
-library(tinytex)
 
 ```
 
@@ -31,11 +35,10 @@ raw_campaign_data <- read_csv("data/32946503_Chenuli Muthukuda Arachchige.csv")
 ## Introduction 
 This report examines the relationship between marketing expenditure per customer and their corresponding purchase amounts in an online retail context. Understanding whether higher marketing investment leads to increased purchases is essential for improving budget efficiency and return on investment. By analysing customer-level campaign data, this study aims to assess whether higher marketing spend influences their purchase amount. The findings are intended to inform more effective marketing decisions by providing insights that support efficient, data-driven strategies
 
-
 ## Research Question
 This report investigates the research question: To what extent does higher marketing expenditure per customer influence their purchase amount?
 
-The study analyses customer-level campaign data to evaluate the direction and strength of this relationship. The aim is to determine whether increased marketing investment leads to meaningful changes in customer purchasing amount.
+The study analyses customer-level campaign data to evaluate the direction and strength of this relationship. The aim is to determine whether increased marketing investment leads to meaningful changes in customer purchase amount.
 
 
 ## Dataset Introduction
@@ -56,9 +59,9 @@ distinct()
 
 ```
 
-The processed dataset contains customer-level campaign data from an online retail marketing campaign, capturing how individual customers respond to different levels of marketing investment. Each observation represents a single customer and includes variables such as customer_id (a unique identifier), marketing_spend (the amount spent targeting the customer), purchase_amount (the total value of purchases made), visits (the number of customer interactions), and segment (customer classification). These variables enable analysis of the relationship between marketing expenditure and customer purchasing behaviour. The dataset captures both customer engagement and spending outcomes, allowing for meaningful comparisons across customer segments.
+The processed dataset contains customer-level campaign data from an online retail marketing campaign, capturing how individual customers respond to different levels of marketing investment. Each observation represents a single customer and includes variables such as customer_id (a unique identifier), marketing_spend (the amount spent targeting the customer), purchase_amount (the total value of purchases made), visits (the number of customer interactions), and segment (customer classification). These variables enable analysis of the relationship between marketing expenditure and customer purchase amounts. The dataset captures both customer engagement and their spending outcomes, allowing for meaningful comparisons across customer segments.
 
-The raw dataset was cleaned to ensure accuracy and relevance. Variables not directly related to the research question, such as notes and signup_date, were removed to reduce unnecessary information. Records with missing values in purchase_amount were excluded, as this variable is the key outcome of the analysis and treating missing values as zero would distort results. Duplicate entries were also removed to ensure each customer was represented only once, preventing potential bias. These steps resulted in a clean and consistent dataset suitable for analysing the relationship between marketing expenditure and customer purchase amounts.
+The raw dataset was cleaned to ensure accuracy and relevance. Variables not directly related to the research question, such as notes and signup_date, were removed to reduce unnecessary information. Records with missing values in purchase_amount were excluded, as this variable is the key outcome of the analysis and treating missing values as zero could distort results and affect the accuracy of the dataset. Duplicate entries were also removed to ensure each customer was represented only once, preventing potential bias. These steps resulted in a clean and consistent dataset suitable for analysing the relationship between marketing expenditure and customer purchase amounts.
 
 ## Dataset Description subsection
 ```{r}
@@ -77,7 +80,6 @@ ncol(processed_campaign_data)
 
 # Check the dataset structure
 str(processed_campaign_data)
-str(processed_campaign_data) 
 
 ```
 
@@ -105,7 +107,7 @@ processed_campaign_data |>
 
 @tbl-summary summarises the average marketing spend, purchase amount, number of visits, and total customers across each segment, providing a broader view of differences in customer behaviour and engagement beyond marketing investment and purchasing outcomes.
 
-The Consumer segment records the highest average marketing spend (175.14) and visits (6.15), but not the highest purchase amount (125.43), suggesting that greater marketing exposure and engagement do not necessarily lead to higher spending. In contrast, the Enterprise segment, despite lower marketing spend (140.01) and the fewest visits (4.6), achieves the highest average purchase amount (131.39), indicating more efficient conversion of marketing efforts into sales.
+The consumer segment records the highest average marketing spend (175.14) and visits (6.15), but not the highest purchase amount (125.43), suggesting that greater marketing exposure and engagement do not necessarily lead to higher spending. In contrast, the Enterprise segment, despite lower marketing spend (140.01) and the fewest visits (4.6), achieves the highest average purchase amount (131.39), indicating more efficient conversion of marketing efforts into sales.
 
 The SMB segment shows lower marketing spend (125.77), visits (5), and the lowest purchase amount (100.09), reflecting comparatively weaker engagement and purchasing behaviour. Overall, these patterns suggest that customer responses to marketing efforts vary across segments, highlighting the influence of engagement and segment characteristics on marketing effectiveness. This provides important context for analysing the relationship between marketing expenditure and purchase amounts in the following section. 
 
@@ -133,11 +135,12 @@ ggplot(data = processed_campaign_data,
 Overall, the boxplot reveals that purchase amounts are uneven and vary considerably across the dataset. Although the median values fall within a moderate range, the wide spread of data suggests that some customers make significantly larger purchases than others. This indicates that customer spending is not consistent and provides deeper insight into purchasing patterns. These observations establish a foundation for further analysis of the relationship between marketing expenditure and purchase amount.
 
 
-## Results 
+## Results
 
 ```{r}
 #| label: fig-marketing-purchase-relationship
-#| fig-cap: “Relationship between Marketing spend and Purchase amount"
+#| fig-cap: "Relationship between Marketing Spend and Purchase Amount"
+#| fig-pos: H
 
 ggplot(data = processed_campaign_data,
        aes(x = marketing_spend,
@@ -156,12 +159,13 @@ ggplot(data = processed_campaign_data,
 
 ```
 
-
-
+@fig-marketing-purchase-relationship shows a positive relationship between marketing expenditure per customer and purchase amount, indicated by the upward-sloping regression line. As marketing spend increases, purchase amounts generally rise, suggesting that higher investment is associated with higher purchase amounts. However, the data points are widely dispersed around the line, indicating considerable variability. At lower levels of marketing spend, purchase amounts are more clustered, whereas at higher spending levels, the spread widens, with both moderate and high values observed. This suggests that while increased marketing spend can lead to higher purchases, the outcomes become less predictable, indicating a moderate rather than strong relationship. This therefore aligns with @fig-purchase-distribution, where we saw purchase amounts were unevenly distributed across the datset.
 
 ```{r}
 #| label: fig-marketing-purchase-by-segment-relationship
 #| fig-cap: "Purchase amount vs Marketing spend by Customer Segment"
+#| fig-pos: H
+
 
 ggplot(data = processed_campaign_data,
        aes(x = marketing_spend,
@@ -180,10 +184,8 @@ ggplot(data = processed_campaign_data,
 
 ```
 
+@fig-marketing-purchase-by-segment-relationship examines this relationship further across different customer segments. The overall positive trend remains, but its strength varies slightly. The Enterprise segment shows a more consistent pattern, with points closer to the regression line, suggesting more reliable outcomes from increased marketing spend. In contrast, the consumer segment displays greater variability, particularly at higher spending levels, indicating less predictable results. The SMB segment also shows a positive trend, though with some dispersion as well, indicating a less consistent relationship between marketing spend and purchase amount. These findings are consistent with @tbl-summary, where higher average marketing spend did not always correspond to higher average purchase amounts across segments.
 
+#### Results Summary
 
-@fig-marketing-purchase-relationship shows a positive relationship between marketing expenditure per customer and purchase amount, indicated by the upward-sloping regression line. As marketing spend increases, purchase amounts generally rise, suggesting that higher investment is associated with higher purchase amount. However, the data points are widely dispersed around the line, indicating considerable variability. At lower levels of marketing spend, purchase amounts are more clustered, whereas at higher spending levels, the spread widens, with both moderate and high values observed. This suggests that while increased marketing spend can lead to higher purchases, the outcomes become less predictable, indicating a moderate rather than strong relationship. This therefore aligns with @fig-purchase-distribution, where we saw purchase amounts were unevenly distributed across the datset.
-
-@fig-marketing-purchase-by-segment-relationship examines this relationship across different customer segments. The overall positive trend remains, but its strength varies slightly. The Enterprise segment shows a more consistent pattern, with points closer to the regression line, suggesting more reliable outcomes from increased marketing spend. In contrast, the Consumer segment displays greater variability, particularly at higher spending levels, indicating less predictable results. The SMB segment also shows a positive trend, though with some dispersion, suggesting that marketing spend influences purchases but not consistently. These findings are consistent with @tbl-summary, where higher average marketing spend did not always correspond to higher average purchases across segments.
-
-Overall, to a moderate extent, higher marketing expenditure per customer influences purchase amount. The visual evidence confirms a positive relationship, but the spread of data points and slight variation across segments indicate that this effect is not strong or fully consistent. This suggests that while increasing marketing spend can lead to higher purchases, its impact is not uniform and depends on how each customers respond to marketing efforts which may vary depending on segment characteristics, visits, and other factors.
+Overall, to a moderate extent, higher marketing expenditure per customer influences purchase amount. The visual evidence confirms a positive relationship, but the spread of data points and slight variation across segments indicate that this effect is not strong or fully consistent. This suggests that while increasing marketing spend can lead to higher purchases, its impact is not uniform and depends on how each customers respond to marketing efforts which may vary depending on segment characteristics, customer engagement (visits), and other factors.

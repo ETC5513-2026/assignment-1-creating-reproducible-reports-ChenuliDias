@@ -1,0 +1,31 @@
+---
+title: "ETC5513 Assignment 01 Appendix: AI Usage Declaration"
+format: 
+  html: default
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## AI Acknowledgment
+
+I used AI as a supplementary support tool while completing this assignment, primarily to improve the clarity, structure, conciseness, and professionalism of my written communication. Its role was to support my learning and refine my explanations rather than generate any original analysis, coding, or conclusions.
+
+Specifically, I used AI to:
+
+1- Review, condense, and rephrase written sections of my report while preserving my original explanations, to improve readability, flow, and academic tone.
+
+2- Provide general guidance and explanations on R functions for summarising data, checking data structures, and performing data cleaning tasks.
+
+3- Offer advice on best practices for presenting tables and plots, including enhancing clarity, readability, and the use of colour choices and themes in ggplot2.
+
+All data cleaning, coding, table and plot creation, analysis, and interpretation were completed independently by me. All outputs and conclusions reflect my own work.
+
+Links to prompts used:
+
+[Prompt link 01](https://chatgpt.com/share/69ce34f8-93e4-8324-93e6-86369f9e7619)
+[Prompt link 02](https://chatgpt.com/share/69ce34cb-368c-8324-baf6-e10ed990d275)
+[Prompt link 03](https://chatgpt.com/share/69ce34e9-ee38-839e-ae74-cde9b639b385)
+
